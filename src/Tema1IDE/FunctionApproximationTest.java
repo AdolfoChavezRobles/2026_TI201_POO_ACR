@@ -1,17 +1,14 @@
 
 package Tema1IDE;
 
-/**
- *
- * @author Adolfo
- */
 public class FunctionApproximationTest {
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 
-        FunctionApproximation fa =
-                new FunctionApproximation(0, 5, 100);
+        FunctionApproximation fa = new FunctionApproximation(0, 5, 10);
 
         fa.compute();
-        fa.printResults();
+        fa.print();
+
+        System.out.println("Area obtenida: " + fa.getArea());
     }
 }

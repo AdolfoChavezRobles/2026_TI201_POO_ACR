@@ -14,10 +14,13 @@ package Tema1IDE;
 
 public class FunctionApproximation {
     
-    private double xIni;
+
+   private double xIni;
     private double xEnd;
     private int n;
     private double dx;
+    private double[] x;
+    private double[] fx;
     private double area;
 
     public FunctionApproximation(double xIni, double xEnd, int n) {
@@ -25,18 +28,25 @@ public class FunctionApproximation {
         this.xEnd = xEnd;
         this.n = n;
         this.dx = (xEnd - xIni) / n;
-        this.area = 0;
+
+        x = new double[n + 1];
+        fx = new double[n + 1];
+        area = 0;
     }
 
-    public double evaluate(double x) {
-        return x * x; // f(x) = x²
+    private double f(double x) {
+        return x * x; 
     }
 
     public void compute() {
 
+        for (int i = 0; i <= n; i++) {
+            x[i] = xIni + i * dx;
+            fx[i] = f(x[i]);
+        }
+
         for (int i = 0; i < n; i++) {
-            double x = xIni + i * dx;
-            area += evaluate(x) * dx;
+            area += fx[i] * dx;
         }
     }
 
@@ -44,10 +54,11 @@ public class FunctionApproximation {
         return area;
     }
 
-    public void printResults() {
-        System.out.println("Intervalo: [" + xIni + ", " + xEnd + "]");
-        System.out.println("Subintervalos: " + n);
-        System.out.println("dx: " + dx);
+    public void print() {
+        System.out.println("x\tf(x)");
+        for (int i = 0; i <= n; i++) {
+            System.out.println(x[i] + "\t" + fx[i]);
+        }
         System.out.println("Area aproximada: " + area);
     }
 }
